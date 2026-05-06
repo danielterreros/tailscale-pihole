@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
       - TS_HOSTNAME=raspberrypi # Nombre de tu dispositivo.
-      - TS_AUTHKEY=tskey-auth-xxxxxxxx # Key de autenticación.
+      - TS_AUTHKEY=tskey-auth-xxxxxxxx # Key de autenticación. Generar en el panel web de Tailscale.
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_ROUTES=192.168.1.0/24 # Rango de IPs de tu red local.
       - TS_EXTRA_ARGS=--advertise-exit-node
@@ -41,8 +41,8 @@ services:
      # - FTLCONF_webserver_port=8080,8443s # Opcional: cambiar puertos 80:80 (HTTP) y 443:443 (HTTPS) para acceso web.
       - FTLCONF_dns_listeningMode=ALL
      # - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
-      - PIHOLE_UID=1000 # UID de tu máquina.
-      - PIHOLE_GID=1000 # UID de tu máquina.
+      - PIHOLE_UID=1000 # UID de tu máquina. Comprobar con comando: id -u
+      - PIHOLE_GID=1000 # UID de tu máquina. Comprobar con comando: id -g
     volumes:
       - ./pihole:/etc/pihole # Directorio para archivos persistentes.
     cap_add:
