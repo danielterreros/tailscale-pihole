@@ -36,10 +36,10 @@ Usa un `docker-compose.yml` u otro dependiendo del dispositivo donde quieras ins
 ## 🌍 Acceso Web
 
 ### Tailscale:
-https://tailscale.com
+https://login.tailscale.com
 
 ### Pi-hole (Raspberry Pi / PC):
-`http://IP-DE-TU-SERVIDOR/admin`
+`http://IP-DE-TU-SERVIDOR:80/admin` o `https://IP-DE-TU-SERVIDOR:443/admin`
 
 ### Pi-hole (Servidor NAS):
 `http://IP-DE-TU-PIHOLE/admin`
