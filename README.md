@@ -37,7 +37,7 @@ Si estás empezando en el mundo del self-hosting y los servidores caseros, estos
 
 Usa el `docker-compose.yml` correspondiente según el dispositivo donde lo vayas a instalar. Antes de desplegar los contenedores, modifica las líneas que contengan `# Comentario`.
 
-### Raspberry Pi / PC
+### Docker Compose para Raspberry Pi / PC
 
 ```yaml
 services:
@@ -94,7 +94,7 @@ services:
 ```
 
 
-### Servidor NAS (UGREEN, Synology, QNAP, etc)
+### Docker Compose para servidor NAS (UGREEN, Synology, QNAP, etc)
 
 ```yaml
 networks:          
