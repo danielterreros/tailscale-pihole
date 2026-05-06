@@ -1,4 +1,4 @@
-# Tailscale + Pi-hole
+# Tailscale + Pi-hole en Docker
 
 Docker Compose para instalar Tailscale y Pi-hole en Raspberry Pi, PC o servidores NAS.
 Tailscale permite acceder de forma remota a tu red local sin necesidad de abrir puertos en el router, mientras que Pi-hole bloquea anuncios y rastreadores en todos los dispositivos de tu red local o conectados mediante Tailscale.
