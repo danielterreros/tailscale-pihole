@@ -79,7 +79,7 @@ services:
      # - "123:123/udp" # Opcional: usar Pi-hole como cliente NTP.
     environment:
       - TZ=Europe/Madrid # Zona horaria.
-      - FTLCONF_webserver_api_password=${PIHOLE_PASSWORD} # Password de acceso a Pi-hole.
+      - FTLCONF_webserver_api_password=tupassword # Password de acceso a Pi-hole.
      # - FTLCONF_webserver_port=8080,8443s # Opcional: cambiar puertos 80:80 (HTTP) y 443:443 (HTTPS) para acceso web.
       - FTLCONF_dns_listeningMode=ALL
      # - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
@@ -145,7 +145,7 @@ services:
         ipv4_address: 192.168.1.5 # IP libre en tu LAN para Pi-hole.
     environment:
       - TZ=Europe/Madrid #Zona horaria.
-      - FTLCONF_webserver_api_password=${PIHOLE_PASSWORD} # Password de acceso a Pi-hole.
+      - FTLCONF_webserver_api_password=tupassword # Password de acceso a Pi-hole.
       - FTLCONF_dns_listeningMode=ALL
       - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
       - PIHOLE_UID=1000 # UID de tu máquina. Comprobar con comando: id -u
