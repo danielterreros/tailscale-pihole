@@ -40,12 +40,18 @@ Usa el `docker-compose.yml` correspondiente según el dispositivo donde lo vayas
 ### Docker Compose para Raspberry Pi / PC
 
 ```yaml
+networks:
+  tailscale_net:
+    driver: bridge
+ 
 services:
   tailscale:
     image: tailscale/tailscale:latest
     container_name: tailscale
     hostname: raspberrypi # Nombre de tu dispositivo.
     restart: unless-stopped
+    networks:
+      - tailscale_net
     environment:
       - TS_HOSTNAME=raspberrypi # Nombre de tu dispositivo.
       - TS_AUTHKEY=tskey-auth-xxxxxxxx # Key de autenticación. Generar en el panel web de Tailscale.
@@ -64,12 +70,15 @@ services:
     sysctls:
       - net.ipv4.ip_forward=1
       - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.default.forwarding=1
       
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
     hostname: raspberrypi # Nombre de tu dispositivo.
     restart: unless-stopped
+    networks:
+      - tailscale_net
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -80,7 +89,6 @@ services:
     environment:
       - TZ=Europe/Madrid # Zona horaria.
       - FTLCONF_webserver_api_password=tupassword # Password de acceso a Pi-hole.
-     # - FTLCONF_webserver_port=8080,8443s # Opcional: cambiar puertos 80:80 (HTTP) y 443:443 (HTTPS) para acceso web.
       - FTLCONF_dns_listeningMode=ALL
      # - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
       - PIHOLE_UID=1000 # UID de tu máquina. Comprobar con comando: id -u
@@ -98,7 +106,7 @@ services:
 
 ```yaml
 networks:          
-  lan_macvlan:
+  tailscale_macvlan:
     driver: macvlan
     driver_opts:
       parent: eth0 # Interfaz de red de tu máquina. Comprobar con comando: ip route | grep default
@@ -114,7 +122,7 @@ services:
     hostname: ugreennas # Nombre de tu dispositivo.
     restart: unless-stopped
     networks:
-      lan_macvlan:
+      tailscale_macvlan:
         ipv4_address: 192.168.1.4 # IP libre en tu LAN para Tailscale.
     environment:
       - TS_HOSTNAME=ugreennas # Nombre de tu dispositivo.
@@ -134,6 +142,7 @@ services:
     sysctls:
       - net.ipv4.ip_forward=1
       - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.default.forwarding=1
       
   pihole:
     image: pihole/pihole:latest
@@ -141,13 +150,13 @@ services:
     hostname: ugreennas # Nombre de tu dispositivo.
     restart: unless-stopped
     networks:
-      lan_macvlan:
+      tailscale_macvlan:
         ipv4_address: 192.168.1.5 # IP libre en tu LAN para Pi-hole.
     environment:
       - TZ=Europe/Madrid #Zona horaria.
       - FTLCONF_webserver_api_password=tupassword # Password de acceso a Pi-hole.
       - FTLCONF_dns_listeningMode=ALL
-      - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
+     # - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
       - PIHOLE_UID=1000 # UID de tu máquina. Comprobar con comando: id -u
       - PIHOLE_GID=10 # GID de tu máquina. Comprobar con comando: id -g
     volumes:
