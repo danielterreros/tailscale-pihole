@@ -1,9 +1,15 @@
+networks:
+  tailscale_net:
+    driver: bridge
+ 
 services:
   tailscale:
     image: tailscale/tailscale:latest
     container_name: tailscale
     hostname: raspberrypi # Nombre de tu dispositivo.
     restart: unless-stopped
+    networks:
+      - tailscale_net
     environment:
       - TS_HOSTNAME=raspberrypi # Nombre de tu dispositivo.
       - TS_AUTHKEY=tskey-auth-xxxxxxxx # Key de autenticación. Generar en el panel web de Tailscale.
@@ -28,7 +34,10 @@ services:
     container_name: pihole
     hostname: raspberrypi # Nombre de tu dispositivo.
     restart: unless-stopped
+    networks:
+      - tailscale_net
     ports:
+     # Comprobar puertos libres con comando: sudo ss -tulpn | grep :puerto
       - "53:53/tcp"
       - "53:53/udp"
       - "80:80/tcp"
@@ -36,9 +45,8 @@ services:
      # - "67:67/udp" # Opcional: usar Pi-hole como servidor DHCP.
      # - "123:123/udp" # Opcional: usar Pi-hole como cliente NTP.
     environment:
-      - TZ=Europe/Madrid # Zona horaria.
-      - FTLCONF_webserver_api_password=${PIHOLE_PASSWORD} # Password de acceso a Pi-hole.
-     # - FTLCONF_webserver_port=8080,8443s # Opcional: cambiar puertos 80:80 (HTTP) y 443:443 (HTTPS) para acceso web.
+      - TZ=Europe/Madrid # Zona horaria. Comprobar aquí: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      - FTLCONF_webserver_api_password=tupassword # Password de acceso a Pi-hole.
       - FTLCONF_dns_listeningMode=ALL
      # - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
       - PIHOLE_UID=1000 # UID de tu máquina. Comprobar con comando: id -u
