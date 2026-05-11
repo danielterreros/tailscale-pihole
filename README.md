@@ -79,6 +79,7 @@ services:
     networks:
       - tailscale_net
     ports:
+     # Comprobar puertos libres con comando: sudo ss -tulpn | grep :puerto
       - "53:53/tcp"
       - "53:53/udp"
       - "80:80/tcp"
@@ -86,7 +87,7 @@ services:
      # - "67:67/udp" # Opcional: usar Pi-hole como servidor DHCP.
      # - "123:123/udp" # Opcional: usar Pi-hole como cliente NTP.
     environment:
-      - TZ=Europe/Madrid # Zona horaria.
+      - TZ=Europe/Madrid # Zona horaria. Comprobar aquí: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
       - FTLCONF_webserver_api_password=tupassword # Password de acceso a Pi-hole.
       - FTLCONF_dns_listeningMode=ALL
      # - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
@@ -151,7 +152,7 @@ services:
       tailscale_macvlan:
         ipv4_address: 192.168.1.5 # IP libre en tu LAN para Pi-hole.
     environment:
-      - TZ=Europe/Madrid #Zona horaria.
+      - TZ=Europe/Madrid #Zona horaria. Comprobar aquí: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
       - FTLCONF_webserver_api_password=tupassword # Password de acceso a Pi-hole.
       - FTLCONF_dns_listeningMode=ALL
      # - FTLCONF_dns_specialDomains_iCloudPrivateRelay=true # Opcional: relay privado de Apple.
