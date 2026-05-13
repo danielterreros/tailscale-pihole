@@ -3,8 +3,8 @@
 Docker Compose para instalar Tailscale y Pi-hole en Raspberry Pi, PC o servidores NAS.
 Tailscale permite acceder de forma remota a tu red local sin necesidad de abrir puertos en el router, mientras que Pi-hole bloquea anuncios y rastreadores en todos los dispositivos de tu red local o conectados mediante Tailscale.
 
-### 📺 [Tutorial completo en YouTube](https://youtube.com/@danielotech)
-<br>
+**📺 [Tutorial completo en YouTube](https://youtube.com/@danielotech)**
+
 
 ## 🛒 Hardware recomendado
 
@@ -27,21 +27,21 @@ Tailscale permite acceder de forma remota a tu red local sin necesidad de abrir 
 - [UGREEN NAS DXP4800](https://amzlink.to/az0BZ6iK7V3LS)
 - [UGREEN NAS DXP4800 Plus](https://amzlink.to/az04N89RnbyGU)
 - [Disco duro HDD para NAS](https://amzlink.to/az0ouuFKDlp18)
-<br>
+
 
 ## ✅ Requisitos previos
+
 Si estás empezando en el mundo del self-hosting y los servidores caseros, estos vídeos te servirán como base para utilizar una Raspberry Pi, un PC o un NAS como servidor doméstico con servicios autoalojados. Te recomiendo verlos antes de continuar con esta guía.
-- [Raspberry Pi | Configuración Inicial](https://youtu.be/xRsxs5eBpmI?si=E7SvINDe1LTBV80S)
-- [Raspberry Pi / PC | Instalar Docker y Portainer](https://youtu.be/-7vvELophxU?si=jD1oQdPo2f9jWDQN)
-- [Servidor NAS | Instalar Docker y Portainer](https://youtu.be/hOiNrQXN-VE?si=ekD4vuqoADXxLphR)
-<br>
+- 📺 [Raspberry Pi 5: Configuración de cero](https://youtu.be/xRsxs5eBpmI?si=E7SvINDe1LTBV80S)
+- 📺 [Instalar Docker y Portainer en Raspberry Pi 5 / PC](https://youtu.be/-7vvELophxU?si=jD1oQdPo2f9jWDQN)
+- 📺 [Instalar Docker y Portainer en servidor NAS](https://youtu.be/hOiNrQXN-VE?si=ekD4vuqoADXxLphR)
+
 
 ## ⚙️ Instalación
 
-Usa el `docker-compose.yml` correspondiente según el dispositivo donde lo vayas a instalar. Antes de desplegar los contenedores, modifica las líneas que contengan `# Comentario`  
-<br>
+Usa el `docker-compose.yml` correspondiente según el dispositivo donde lo vayas a instalar. Antes de desplegar los contenedores, modifica las líneas que contengan `# Comentario`
 
-### Docker Compose para Raspberry Pi / PC
+#### Docker Compose para Raspberry Pi / PC
 
 ```yaml
 networks:
@@ -104,9 +104,8 @@ services:
      # - SYS_TIME # Opcional: usar Pi-hole como cliente NTP.
       - SYS_NICE
 ```
-<br>
 
-### Docker Compose para servidor NAS (UGREEN, Synology, QNAP, etc)
+#### Docker Compose para servidor NAS (UGREEN, Synology, QNAP, etc)
 
 ```yaml
 networks:          
@@ -169,9 +168,9 @@ services:
      # - SYS_TIME # Opcional: usar Pi-hole como cliente NTP.
       - SYS_NICE
 ```
-<br>
 
-### 🔧 Configuración adicional
+
+## 🔧 Configuración adicional
 Una vez instalado Tailscale, es necesario permitir que el servidor realice el enrutado de red (IP forwarding). El proceso para habilitarlo puede variar según la distribución de Linux utilizada, aunque los siguientes comandos funcionan en la mayoría de los casos:
 
 - Para sistema Linux con un directorio /etc/sysctl.d
@@ -187,20 +186,20 @@ echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
 echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
 sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 ```
-<br>
 
-### 🌐 Acceso web
+
+## 🌐 Acceso web
 
 #### Tailscale:
-https://login.tailscale.com
+- Panel web Tailscale: https://login.tailscale.com
 
 #### Pi-hole (Raspberry Pi / PC):
-`http://IP-DE-TU-SERVIDOR:80/admin` o `https://IP-DE-TU-SERVIDOR:443/admin`
+- Panel web Pi-hole por HTTP: `http://IP-DE-TU-SERVIDOR:80/admin`
+- Panel web Pi-hole por HTTPS: `https://IP-DE-TU-SERVIDOR:443/admin`
 
 #### Pi-hole (Servidor NAS):
-`http://IP-DE-TU-PIHOLE/admin`
+- Panel web Pi-hole: `http://IP-DE-TU-PIHOLE/admin`
 
-<br>
 
 ## 📄 Documentación oficial
 
