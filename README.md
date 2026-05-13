@@ -172,6 +172,7 @@ services:
 
 
 ## 🔧 Configuración adicional
+
 Una vez instalado Tailscale, es necesario permitir que el servidor realice el enrutado de red ([IP forwarding](https://tailscale.com/docs/features/subnet-routers#enable-ip-forwarding)). El proceso para habilitarlo puede variar según la distribución de Linux utilizada, aunque los siguientes comandos funcionan en la mayoría de los casos:
 
 - Para sistema Linux con un directorio /etc/sysctl.d
