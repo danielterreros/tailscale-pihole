@@ -204,7 +204,7 @@ sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 ## 📄 Documentación oficial
 
 ### Tailscale
-- [Tailscale en Docker](https://tailscale.com/docs/features/containers/docker/how-to/connect-docker-container)
+- [Tailscale en Docker](https://tailscale.com/docs/features/containers/docker)
 - [Tailscale GitHub](https://github.com/tailscale-dev/docker-guide-code-examples)
 - [Tailscale Docker Hub](https://hub.docker.com/r/tailscale/tailscale)
 
